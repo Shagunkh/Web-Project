@@ -739,3 +739,218 @@ body {
     background-color: #e65c00; 
     transform: scale(1.05);
 }
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+    .destination-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+        gap: 10px; /* Reduce spacing between items */
+    }
+
+    .destination:nth-child(1),
+    .destination:nth-child(n+4) {
+        height: 200px; /* Adjust height for smaller screens */
+    }
+
+    .hero h1 {
+        font-size: 28px; /* Slightly smaller font size for headlines */
+    }
+
+    .hero p {
+        font-size: 16px; /* Adjust font size for paragraphs */
+    }
+
+    .notify-form input[type="email"] {
+        width: 80%; /* Reduce width for medium screens */
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .notify-form button {
+        width: auto; /* Keep button size proportional */
+        padding: 10px;
+        font-size: 14px;
+        display: block;
+    }
+}
+
+/* For screens smaller than 500px */
+@media (max-width: 500px) {
+    .destination-grid {
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: 5px; /* Minimal spacing */
+    }
+
+    .destination {
+        height: 150px; /* Adjust height for smaller screens */
+    }
+
+    .hero h1 {
+        font-size: 24px; /* Smaller font size for headlines */
+    }
+
+    .hero p {
+        font-size: 14px; /* Smaller font size for paragraphs */
+    }
+
+    .notify-form input[type="email"] {
+        width: 100%; /* Full width for small screens */
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .notify-form button {
+        width: 100%; /* Full width for small screens */
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+/* For cookie banner adjustments on small screens */
+@media (max-width: 600px) {
+    .cookie-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .cookie-banner button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .notify-form {
+        flex-direction: column; /* Stack input and button vertically */
+        gap: 10px; /* Maintain spacing between elements */
+        width: 100%; /* Ensure full width */
+        padding: 0 15px; /* Add padding for mobile screens */
+    }
+
+    .notify-form input[type="email"] {
+        width: 100%; /* Full width for input field */
+        padding: 12px; /* Adjust padding for better usability */
+        font-size: 14px; /* Slightly smaller font size */
+    }
+
+    .notify-form button {
+        width: 100%; /* Full width for the button */
+        padding: 12px; /* Adjust padding for consistency */
+        font-size: 14px; /* Slightly smaller font size */
+        text-align: center; /* Center align text inside the button */
+    }
+}
+
+/* General Styling for How It Works Section */
+.how-it-works {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+}
+
+.how-it-works h2 {
+    font-size: 28px;
+    color: #0d2040;
+    margin-bottom: 30px;
+}
+
+/* Steps Container */
+.steps-container {
+    display: flex;
+    justify-content: space-between; /* Space between cards */
+    align-items: center; /* Align cards vertically */
+    gap: 20px; /* Spacing between cards */
+}
+
+.step {
+    flex: 1; /* Equal width for all steps */
+    max-width: 250px; /* Limit maximum width of each card */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.step img {
+    width: 80px; /* Image size */
+    height: auto;
+    margin-bottom: 15px; /* Spacing below image */
+}
+
+.step h3 {
+    font-size: 18px; /* Title font size */
+    color: #333; /* Title color */
+    margin-bottom: 10px; /* Spacing below title */
+}
+
+.step p {
+    font-size: 14px; /* Paragraph font size */
+    color: #666; /* Paragraph color */
+}
+
+/* Responsive Design for Medium Screens (768px) */
+@media (max-width: 768px) {
+    .steps-container {
+        flex-wrap: wrap; /* Wrap cards to fit smaller screens */
+        justify-content: center; /* Center align cards */
+        gap: 15px; /* Reduce spacing between cards */
+    }
+
+    .step {
+        max-width: 200px; /* Reduce card width for medium screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+        text-align: center;
+    }
+
+    .step img {
+        width: 70px; /* Slightly smaller image size for medium screens */
+        margin-bottom: 10px;
+    }
+
+    .step h3 {
+        font-size: 16px; /* Adjust title font size for medium screens */
+        margin-bottom: 8px;
+    }
+
+    .step p {
+        font-size: 13px; /* Adjust paragraph text size for medium screens */
+        color: #777;
+    }
+}
+
+/* Responsive Design for Small Screens (500px) */
+@media (max-width: 500px) {
+    .steps-container {
+        flex-direction: column; /* Stack cards vertically on small screens */
+        gap: 10px; /* Minimal spacing between cards */
+        text-align: center;
+        align-items: center;
+    }
+
+    .step {
+        max-width: none; /* Allow full width for small screens */
+        width: 100%; /* Full width for small screens */
+        padding: 15px; /* Adjust padding for small screens */
+        text-align: center;
+    }
+
+    .step img {
+        width: 60px; /* Smaller image size for small screens */
+        margin-bottom: 10px;
+    }
+
+    .step h3 {
+        font-size: 14px; /* Adjust title font size for small screens */
+        margin-bottom: 8px;
+    }
+
+    .step p {
+        font-size: 12px; /* Adjust paragraph text size for small screens */
+        color: #777;
+    }
+}
+
+
+
