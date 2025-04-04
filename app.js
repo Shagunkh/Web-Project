@@ -26,20 +26,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-// const dbUrl = process.env.ATLASDB_URL;
-
-// main().then(()=>{
-//     console.log("connected to DB");
-//    })
-//    .catch((err)=>{
-//     console.log(err);
-//    });
-
-// async function main(){
-//     await mongoose.connect(dbUrl);
-// }
-
-const MONGO_URL ="mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl = process.env.ATLASDB_URL;
 
 main().then(()=>{
     console.log("connected to DB");
@@ -49,9 +36,8 @@ main().then(()=>{
    });
 
 async function main(){
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
-
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({extended: true}));
@@ -59,33 +45,21 @@ app.use(methodOverride("_method"));
 app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
-// const store = MongoStore.create({
-//     mongoUrl: dbUrl, // Ensure dbUrl is defined correctly
-//     crypto: {
-//         secret: process.env.SECRET
-//     },
-//     touchAfter: 24 * 3600 // Time in seconds (1 day)
-// });
+const store = MongoStore.create({
+    mongoUrl: dbUrl, // Ensure dbUrl is defined correctly
+    crypto: {
+        secret: process.env.SECRET
+    },
+    touchAfter: 24 * 3600 // Time in seconds (1 day)
+});
 
 
 // Proper error handling
-// store.on("error", (err) => {
-//     console.error("SESSION STORE ERROR:", err);
-// });
-// const sessionOptions = {
-//     store,
-//     secret:process.env.SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//         expires: Date.now()+7*24*60*60*1000,
-//         maxAge: 7*24*60*60*1000,
-//         httpOnly: true,
-//     },
-// };
-
+store.on("error", (err) => {
+    console.error("SESSION STORE ERROR:", err);
+});
 const sessionOptions = {
-  
+    store,
     secret:process.env.SECRET,
     resave: false,
     saveUninitialized: true,
@@ -148,11 +122,6 @@ app.use((err,req,res,next)=>{
 
 
 app.listen(6060,()=>{
-    console.log("server is listening 8080");
-});
-
-
-app.listen(8080,()=>{
     console.log("server is listening 8080");
 });
 
