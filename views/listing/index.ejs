@@ -1,0 +1,222 @@
+<% layout("/layouts/boilerplate") %>
+<%= success %>
+
+<style>
+   #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+   } 
+   .filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+   }
+   .filter:hover {
+     opacity: 1;
+     cursor: pointer;
+   }
+
+   .filter p {
+      font-size: 0.8rem;
+   }
+
+   .tax-info {
+    display: none;
+   }
+
+   .tax-toggle {
+     border: 1px solid black;
+     border-radius: 1rem;
+     height: 3.25rem;
+     padding:  1rem;
+     margin-left: 5rem;
+
+   }
+</style>
+
+<body>
+    <div id="filters">
+        <div class="filter" data-filter="trending">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+        <div class="filter" data-filter="rooms">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+        </div>
+        <div class="filter" data-filter="iconic-cities">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>Iconic Cities</p>
+        </div>
+        <div class="filter" data-filter="mountains">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountains</p>
+        </div>
+        <div class="filter" data-filter="castles">
+            <div><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Castles</p>
+        </div>
+        <div class="filter" data-filter="pools">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter" data-filter="camping">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </div>
+        <div class="filter" data-filter="farms">
+            <div><i class="fa-solid fa-cow"></i></div>
+            <p>Farms</p>
+        </div>
+        <div class="filter" data-filter="arctic-pools">
+            <div><i class="fa-solid fa-snowflake"></i></div>
+            <p>Arctic Pools</p>
+        </div>
+        
+        <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+        </div>
+        </div>
+    </div>
+
+    
+
+    <div id="listings-container" class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        <% for(let listing of allListings){ %> 
+            <a href="/listings/<%=listing._id%>" class="listing-link" data-category="<%= listing.categories %>">
+                <div class="card col listing-card">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem" />
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b> <%= listing.title %></b> <br/>
+                            <span class="price-value" data-original-price="<%= listing.price %>">
+                                &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+                            </span>
+                            <i class="tax-info" style="display: none;"> &nbsp; (After 18% GST) </i>
+                        </p>
+                        
+                    </div>
+                   
+                </div>
+            </a>
+        <% } %>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script>
+       document.addEventListener("DOMContentLoaded", function () {
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    let listings = document.querySelectorAll(".listing-link");
+
+   
+    listings.forEach(listing => {
+        let priceElement = listing.price;
+        if (priceElement) { 
+            let originalPrice = parseFloat(priceElement.getAttribute("data-original-price")) || 0;
+            priceElement.setAttribute("data-original-price", originalPrice);
+        }
+    });
+
+    
+    taxSwitch.addEventListener("click", function () {
+        let taxInfoElements = document.getElementsByClassName("tax-info");
+
+        for (let info of taxInfoElements) {
+            info.style.display = taxSwitch.checked ? "inline" : "none";
+        }
+
+       
+        listings.forEach(listing => {
+            let priceElement = listing.querySelector(".price-value");
+            if (priceElement) { 
+                let originalPrice = parseFloat(priceElement.getAttribute("data-original-price")) || 0;
+
+                if (taxSwitch.checked) {
+                    let newPrice = originalPrice * 1.18; 
+                    priceElement.innerHTML = `&#8377; ${newPrice.toLocaleString("en-IN")} / night`;
+                } else {
+                    priceElement.innerHTML = `&#8377; ${originalPrice.toLocaleString("en-IN")} / night`;
+                }
+            }
+        });
+    });
+});
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const filters = document.querySelectorAll(".filter");
+            const listings = document.querySelectorAll(".listing-link");
+
+            filters.forEach(filter => {
+                filter.addEventListener("click", function() {
+                    const filterValue = this.getAttribute("data-filter").toLowerCase();
+
+                    listings.forEach(listing => {
+                        const category = listing.getAttribute("data-category").toLowerCase();
+                        if (filterValue === "all" || category.includes(filterValue)) {
+                            listing.style.display = "block";
+                        } else {
+                            listing.style.display = "none";
+                        }
+                    });
+                });
+            });
+        });
+
+
+        (() => {
+    'use strict'
+  
+    
+    const forms = document.querySelectorAll('.needs-validation')
+  
+  
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+  
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("dark-mode-toggle");
+    const body = document.body;
+
+   
+    if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        toggleButton.innerHTML = "☀️ Light Mode";
+    }
+
+   
+    toggleButton.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+
+       
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
+            toggleButton.innerHTML = "☀️ Light Mode";
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+            toggleButton.innerHTML = "🌙 Night Mode";
+        }
+    });
+
+    
+});
+
+
+    </script>
+</body>

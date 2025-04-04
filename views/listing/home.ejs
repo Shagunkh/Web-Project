@@ -1,0 +1,114 @@
+<% layout("/layouts/boilerplate") %>
+
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+        <div class="hero-content">
+            <h1>UP TO 60% OFF ADVENTURE TRAVEL</h1>
+            <p>Join over 40,000 members.</p>
+            <p>Get exclusive access to members-only deals on amazing adventure holidays by email — it's free.</p>
+        </div>
+
+        <!-- Subscription Form -->
+        <form action="/send-email" method="POST" class="notify-form">
+            <input type="email" name="email" required placeholder="Enter your email">
+            <button type="submit">Subscribe</button>
+        </form>
+
+        <!-- Optional Text -->
+        <p class="optional-text">Not thanks, I like boring holidays.</p>
+    </div>
+    </section>
+
+    <!-- Recent Deals -->
+    <section class="recent-deals">
+        <h2>Recent Deals</h2>
+        <div class="deals-container">
+            <% listings.forEach(listing => { %>
+                <a href="/listings/<%=listing._id%>" class="listing-link" data-category="<%= listing.categories %>">
+                <div class="deal-card">
+                    <img src="<%= listing.image.url %>" alt="<%= listing.title %>">
+                    <h3><%= listing.title %></h3>
+                    <p><%= listing.location %></p>
+                    <p>Price: $<%= listing.price %></p>
+                </div>
+                </a>
+            <% }) %>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps-container">
+            <div class="step">
+                <img src="/images/location.png" alt="Handpicked Adventures">
+                <h3>Handpicked Adventures</h3>
+                <p>We search more than 700...</p>
+            </div>
+            <div class="step">
+                <img src="/images/gift.png" alt="Exclusive Deals">
+                <h3>Exclusive Deals</h3>
+                <p>From local gems to highlights...</p>
+            </div>
+            <div class="step">
+                <img src="/images/travel-bag.png" alt="Trips That Match Your Interests">
+                <h3>Trips that match your interests</h3>
+                <p>From local gems to highlights...</p>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <!-- Popular Destinations -->
+   
+        <section class="popular-destinations">
+            <h2>Popular Destinations</h2>
+            <div class="destination-grid">
+                <!-- Destination 1 -->
+                <div class="destination" style="background-image: url('/images/Screenshot 2025-04-03 163829.png');">
+                    <div class="destination-text">
+                       
+                    </div>
+                </div>
+    
+                <!-- Destination 2 -->
+                <div class="destination" style="background-image: url('/images/Screenshot 2025-04-03 163839.png');">
+                    <div class="destination-text">
+                       
+                    </div>
+                </div>
+    
+                <!-- Destination 3 -->
+                <div class="destination" style="background-image: url('/images/Screenshot 2025-04-03 163848.png');">
+                    <div class="destination-text">
+                       
+                    </div>
+                </div>
+    
+                <!-- Destination 4 -->
+                <div class="destination" style="background-image: url('/images/Screenshot 2025-04-03 163856.png');">
+                    <div class="destination-text">
+                        
+                    </div>
+                </div>
+    
+                <!-- Destination 5 -->
+                <div class="destination" style="background-image: url('/images/Screenshot 2025-04-03 163902.png');">
+                    <div class="destination-text">
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+    
+
+    <script src="/scripts/home.js"></script>
+</body>
+
+
+
